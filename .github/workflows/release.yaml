@@ -19,12 +19,12 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Install Launch4j and build EXE
+      - name: Install Launch4j
         shell: cmd
         run: choco install launch4j
 
       - name: Run Launch4j
-        run: .\launch4j\launch4j.exe config.xml
+        run: "C:\Program Files (x86)\Launch4j\launch4j.exe" config.xml
         working-directory: ${{ github.workspace }}
 
       - name: Upload Release Assets
