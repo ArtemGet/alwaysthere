@@ -19,9 +19,12 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Create EXE with Launch4j
+      - name: Download and setup Launch4j
         run: |
-          choco install launch4j -y
+          $url = "https://downloads.sourceforge.net/project/launch4j/launch4j-3/3.14/launch4j-3.14-win32.zip"
+          Invoke-WebRequest -Uri $url -OutFile launch4j.zip
+          Expand-Archive -Path launch4j.zip -DestinationPath .
+          $env:PATH += ";$pwd\launch4j"
           launch4j config.xml
 
       - name: Upload Release Assets
