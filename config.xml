@@ -1,0 +1,16 @@
+<launch4jConfig>
+    <dontWrapJar>false</dontWrapJar>
+    <headerType>gui</headerType>
+    <jar>target/alwaysthere-1.0-SNAPSHOT.jar</jar>
+    <outfile>target/alwaysthere-1.0-SNAPSHOT.exe</outfile>
+    <errTitle></errTitle>
+    <cmdLine></cmdLine>
+    <chdir>.</chdir>
+    <priority>normal</priority>
+    <downloadUrl>https://adoptium.net/</downloadUrl>
+    <supportUrl></supportUrl>
+    <stayAlive>false</stayAlive>
+    <restartOnCrash>false</restartOnCrash>
+    <manifest></manifest>
+    <icon>src/main/resources/icon.png</icon>
+</launch4jConfig>
