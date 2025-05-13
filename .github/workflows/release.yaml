@@ -19,19 +19,19 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Download and setup Launch4j
+      - name: Install Launch4j and build EXE
+        shell: cmd
         run: |
-          $url = "https://downloads.sourceforge.net/project/launch4j/launch4j-3/3.14/launch4j-3.14-win32.zip"
-          Invoke-WebRequest -Uri $url -OutFile launch4j.zip
-          Expand-Archive -Path launch4j.zip -DestinationPath .
-          $env:PATH += ";$pwd\launch4j"
+          choco install launch4j -y --no-progress
+          setx PATH "%PATH%;C:\Program Files (x86)\Launch4j"
+          ping -n 6 127.0.0.1 > nul
           launch4j config.xml
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            target/alwaysthere-1.0-SNAPSHOT.exe
-            target/alwaysthere-1.0-SNAPSHOT.jar
+            target/*.exe
+            target/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
