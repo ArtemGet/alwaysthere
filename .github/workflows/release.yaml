@@ -26,6 +26,7 @@ jobs:
           jpackage --name alwaysthere-1.0-SNAPSHOT ^
             --input target/ ^
             --main-jar alwaysthere-1.0-SNAPSHOT.jar ^
+            --main-class io.github.artemget.alwaysthere.Entrypoint ^
             --type exe ^
             --win-console ^
             --dest target
