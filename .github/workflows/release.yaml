@@ -15,33 +15,20 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+          include: 'jdk'
 
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Install Launch4j
-        shell: cmd
-        run: choco install launch4j -y --no-progress
-
-      - name: Verify Launch4j installation
+      - name: Create Windows EXE
         shell: cmd
         run: |
-          where launch4j
-          dir "C:\Program Files (x86)\Launch4j"
-
-      - name: Run Launch4j
-        shell: cmd
-        run: |
-          start /B /WAIT "C:\Program Files (x86)\Launch4j\launch4j.exe" --l4j-headless --l4j-no-splash config.xml > nul 2>&1
-          if %errorlevel% neq 0 (
-          echo "Ошибка Launch4j: %errorlevel%"
-          exit 1
-          )
-          if not exist "target\*.exe" (
-          echo "EXE файл не найден!"
-          dir target
-          exit 1
-        working-directory: ${{ github.workspace }}
+          jpackage --name alwaysthere-1.0-SNAPSHOT ^
+            --input target/ ^
+            --main-jar alwaysthere-1.0-SNAPSHOT.jar ^
+            --type exe ^
+            --win-console ^
+            --dest target
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v1
