@@ -32,7 +32,15 @@ jobs:
       - name: Run Launch4j
         shell: cmd
         run: |
-          start /B /WAIT "C:\Program Files (x86)\Launch4j\launch4j.exe" --l4j-debug --l4j-no-splash config.xml
+          start /B /WAIT "C:\Program Files (x86)\Launch4j\launch4j.exe" --l4j-headless --l4j-no-splash config.xml > nul 2>&1
+          if %errorlevel% neq 0 (
+          echo "Ошибка Launch4j: %errorlevel%"
+          exit 1
+          )
+          if not exist "target\*.exe" (
+          echo "EXE файл не найден!"
+          dir target
+          exit 1
         working-directory: ${{ github.workspace }}
 
       - name: Upload Release Assets
