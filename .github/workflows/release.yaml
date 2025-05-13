@@ -28,10 +28,11 @@ jobs:
         run: |
           jpackage --name alwaysthere-1.0-SNAPSHOT ^
             --input target/ ^
-            --main-jar alwaysthere-1.0-SNAPSHOT.jar ^
+            --main-jar alwaysthere-1.0-SNAPSHOT-jar-with-dependencies.jar ^
             --main-class io.github.artemget.alwaysthere.Entrypoint ^
             --type exe ^
             --win-console ^
+            --verbose ^
             --dest target
 
       - name: Upload Release Assets
