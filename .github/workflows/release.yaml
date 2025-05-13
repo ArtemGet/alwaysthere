@@ -21,11 +21,12 @@ jobs:
 
       - name: Install Launch4j
         shell: cmd
-        run: choco install launch4j
+        run: choco install launch4j -y --no-progress
 
       - name: Run Launch4j
         shell: cmd
-        run: "C:\Program Files (x86)\Launch4j\launch4j.exe" config.xml
+        run: |
+          "C:\Program Files (x86)\Launch4j\launch4j.exe" config.xml
         working-directory: ${{ github.workspace }}
 
       - name: Upload Release Assets
