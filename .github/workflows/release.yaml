@@ -32,7 +32,7 @@ jobs:
       - name: Run Launch4j
         shell: cmd
         run: |
-          start /B /WAIT "C:\Program Files (x86)\Launch4j\launch4j.exe" config.xml
+          start /B /WAIT "C:\Program Files (x86)\Launch4j\launch4j.exe" --l4j-debug --l4j-no-splash config.xml
         working-directory: ${{ github.workspace }}
 
       - name: Upload Release Assets
